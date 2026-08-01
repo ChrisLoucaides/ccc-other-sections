@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cyprus Comic Con — Section Rotator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient backdrop: brand purple field + drifting halftone, fills any viewport -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop__wash"></div>
+    <div class="backdrop__bloom"></div>
+    <div class="backdrop__halftone backdrop__halftone--fine"></div>
+    <div class="backdrop__halftone backdrop__halftone--coarse"></div>
+    <div class="backdrop__vignette"></div>
+  </div>
+
+  <!-- Fixed 1920x1080 design stage, scaled to fit whatever size OBS gives us -->
+  <div class="stage-fit">
+    <div class="stage" id="stage">
+
+      <img class="brandmark" id="brandmark" src="assets/ccc.png" alt="Cyprus Comic Con">
+
+      <!-- Slides are built here by app.js -->
+      <div class="deck" id="deck"></div>
+
+      <div class="progress" id="progress" hidden>
+        <div class="progress__fill" id="progressFill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="sections.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

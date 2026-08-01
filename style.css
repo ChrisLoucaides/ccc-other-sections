@@ -1,0 +1,500 @@
+/* ==========================================================================
+   Cyprus Comic Con — section rotator for OBS
+   Brand: Pantone 526c #742f8a / Pantone 158c #ef7521 / Natural Black #181818
+   Type:  LEMON MILK (caps display) + Keep Calm (general text)
+   ========================================================================== */
+
+/* --- Typefaces -----------------------------------------------------------
+   The real brand faces are used when they are installed on this machine.
+   If they are not, the bundled Google fallbacks (Poppins / Quicksand) keep
+   the same geometric-rounded personality and work with no internet.
+   To upgrade: install LEMON MILK and Keep Calm as Windows fonts, restart OBS.
+   ------------------------------------------------------------------------ */
+
+@font-face {
+  font-family: 'CCC Display';
+  font-weight: 800;
+  font-style: normal;
+  font-display: block;
+  src: local('LEMONMILK-Bold'), local('LEMON MILK Bold'), local('Lemon Milk Bold'),
+       local('LEMONMILK-Medium'), local('LEMONMILK-Regular'), local('LEMON MILK'),
+       url('fonts/poppins-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'CCC Body';
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+  src: local('KeepCalm-Medium'), local('Keep Calm Medium'), local('Keep Calm'),
+       url('fonts/quicksand-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'CCC Body';
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+  src: local('KeepCalm-Book'), local('Keep Calm Medium'), local('Keep Calm'),
+       url('fonts/quicksand-700.woff2') format('woff2');
+}
+
+/* --- Tokens ------------------------------------------------------------- */
+
+:root {
+  /* brand */
+  --grape:        #742f8a;
+  --zest:         #ef7521;
+  --night:        #181818;
+
+  /* derived field colours */
+  --grape-lift:   #93409f;
+  --grape-deep:   #3a1450;
+  --grape-abyss:  #200b2e;
+  --cream:        #f7f4fb;
+
+  /* per-section accent, overridden inline by app.js */
+  --accent:       var(--zest);
+
+  --font-display: 'CCC Display', 'Poppins', 'Segoe UI', sans-serif;
+  --font-body:    'CCC Body', 'Quicksand', 'Segoe UI', sans-serif;
+
+  /* motion */
+  --ease-out:     cubic-bezier(.16, 1, .3, 1);
+  --ease-pop:     cubic-bezier(.22, 1.28, .36, 1);
+  --ease-in:      cubic-bezier(.55, 0, .85, .3);
+  --in-dur:       .72s;
+  --out-dur:      .52s;
+}
+
+/* --- Shell -------------------------------------------------------------- */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--grape-abyss);
+  color: var(--cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Backdrop ----------------------------------------------------------- */
+
+.backdrop { position: fixed; inset: 0; overflow: hidden; }
+.backdrop > * { position: absolute; inset: 0; }
+
+.backdrop__wash {
+  background:
+    radial-gradient(118% 92% at 16% 6%,
+      var(--grape-lift) 0%,
+      var(--grape)      30%,
+      var(--grape-deep) 64%,
+      var(--grape-abyss) 100%);
+}
+
+.backdrop__bloom {
+  background: radial-gradient(38% 46% at 26% 74%, rgba(239, 117, 33, .40), transparent 70%);
+  filter: blur(50px);
+  animation: bloom-breathe 13s ease-in-out infinite alternate;
+}
+
+/* Halftone dots — the CCC mark's core texture. Two layers drifting at
+   different speeds and scales so the field has depth instead of a flat screen. */
+.backdrop__halftone {
+  inset: -140px;
+  will-change: transform;
+}
+
+.backdrop__halftone--fine {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, .11) 2.2px, transparent 2.5px);
+  background-size: 36px 36px;
+  animation: drift-fine 44s linear infinite;
+}
+
+.backdrop__halftone--coarse {
+  background-image: radial-gradient(circle, rgba(239, 117, 33, .30) 4px, transparent 4.4px);
+  background-size: 82px 82px;
+  animation: drift-coarse 71s linear infinite;
+  -webkit-mask-image: radial-gradient(64% 70% at 78% 82%, #000 0%, transparent 72%);
+          mask-image: radial-gradient(64% 70% at 78% 82%, #000 0%, transparent 72%);
+}
+
+.backdrop__vignette {
+  background: radial-gradient(78% 78% at 50% 46%, transparent 40%, rgba(24, 6, 34, .58) 100%);
+}
+
+@keyframes drift-fine   { to { transform: translate3d(36px, 36px, 0); } }
+@keyframes drift-coarse { to { transform: translate3d(-82px, 41px, 0); } }
+@keyframes bloom-breathe {
+  from { opacity: .70; transform: scale(1)    translateY(0); }
+  to   { opacity: 1;   transform: scale(1.09) translateY(-22px); }
+}
+
+/* --- Stage -------------------------------------------------------------- */
+
+.stage-fit {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* The unscaled 1920x1080 box is pinned dead centre with negative margins —
+   centring layout alone will not do it, because a box larger than the
+   viewport aligns to start. app.js then scales it about its own centre. */
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  margin: -540px 0 0 -960px;
+  transform-origin: center center;   /* scale set by app.js */
+}
+
+.brandmark {
+  position: absolute;
+  top: 54px;
+  left: 68px;
+  height: 104px;
+  width: auto;
+  filter: drop-shadow(0 8px 20px rgba(20, 6, 32, .45));
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(247, 244, 251, .12);
+}
+
+.progress__fill {
+  height: 100%;
+  width: 0;
+  background: var(--zest);
+  box-shadow: 0 0 18px rgba(239, 117, 33, .8);
+}
+
+/* --- Deck / slide layout ------------------------------------------------- */
+
+.deck { position: absolute; inset: 0; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  /* minmax(0, 1fr), not 1fr — an auto-min column would widen to fit the
+     no-wrap URL instead of constraining it, and the fitter needs a real cap */
+  grid-template-columns: 872px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 76px;
+  padding: 0 76px 0 96px;
+}
+
+/* --- Signature: the comic panel the section logo breaks out of ------------ */
+
+.panel-slot {
+  position: relative;
+  height: 622px;
+  display: grid;
+  place-items: center;
+}
+
+.panel-shadow {
+  position: absolute;
+  inset: 0;
+  /* drop-shadow (not box-shadow) so the shadow follows the wipe reveal */
+  filter: drop-shadow(0 30px 52px rgba(18, 6, 30, .62));
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  border: 7px solid var(--grape);
+  border-radius: 12px;
+  transform: rotate(-3.4deg);
+  overflow: hidden;
+  clip-path: inset(0 0 0 0 round 12px);
+}
+
+/* halftone inside the panel, densest toward the lower right like the CCC mark */
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background-image: radial-gradient(circle, var(--accent) 3.4px, transparent 3.7px);
+  background-size: 30px 30px;
+  opacity: .30;
+  -webkit-mask-image: linear-gradient(128deg, transparent 14%, #000 96%);
+          mask-image: linear-gradient(128deg, transparent 14%, #000 96%);
+}
+
+/* Sized and nudged per section from sections.js, because logo files differ in
+   both aspect ratio and how much transparent padding they carry. The nudge is
+   an explicit pixel offset from the panel's centre, so the artwork lands the
+   same way no matter what shape the file is. */
+.panel__logo {
+  position: absolute;
+  z-index: 2;
+  width: 1160px;                /* default suits a wide, wordmark-style logo */
+  max-height: 820px;            /* safety net for tall or square files */
+  object-fit: contain;
+  left: 50%;
+  top: 50%;
+  /* offset right of centre so the artwork breaks the panel's edge, the same
+     move the white C's make in the Cyprus Comic Con mark */
+  transform: translate(calc(-50% + var(--logo-nudge, 0px)), -50%) rotate(-1.2deg);
+  filter: drop-shadow(0 18px 26px rgba(28, 10, 40, .38));
+}
+
+/* --- Wayfinding badge -----------------------------------------------------
+   Top right, mirroring the brand mark top left. It holds the same slot on
+   every section, so anyone watching the wall learns where to look for
+   "which part of the venue is this?" without reading the rest of the frame.
+   -------------------------------------------------------------------------- */
+
+.where {
+  position: absolute;
+  top: 60px;
+  right: 72px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 28px 13px 24px;
+  border: 5px solid var(--grape);
+  border-radius: 12px;
+  background: var(--cream);
+  transform: rotate(1.5deg);
+  box-shadow: 0 14px 30px rgba(18, 6, 30, .44);
+}
+
+.where__pin {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  fill: var(--zest);
+}
+
+.where__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: .015em;
+  text-transform: uppercase;
+  color: var(--grape);
+  white-space: nowrap;
+}
+
+/* --- Type column --------------------------------------------------------- */
+
+.copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-weight: 700;
+  font-size: 25px;
+  letter-spacing: .18em;   /* holds a name as long as "Mediterranean
+                              Cosplay Championship" on one line */
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 46px;
+  height: 4px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.headline {
+  margin-top: 26px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 122px;
+  line-height: .87;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(18, 6, 30, .45);
+}
+
+.headline em { font-style: normal; color: var(--accent); }
+
+.headline__line { display: block; }
+
+.blurb {
+  margin-top: 30px;
+  max-width: 748px;
+  font-size: 31px;
+  font-weight: 500;
+  line-height: 1.42;
+  color: rgba(247, 244, 251, .86);
+}
+
+.tags {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  list-style: none;
+}
+
+.tag {
+  padding: 11px 24px;
+  border: 2px solid rgba(247, 244, 251, .38);
+  border-radius: 999px;
+  background: rgba(247, 244, 251, .14);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.link { margin-top: 48px; }
+
+.link__label {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 251, .76);
+}
+
+/* Orange fill, white type, purple keyline — the same three-layer build as the
+   Cyprus Comic Con and Nomnomnomicon logotypes, so the CTA reads as brand. */
+.link__url {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 17px 32px;
+  border: 5px solid var(--grape);
+  border-radius: 10px;
+  background: var(--zest);
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: .002em;
+  white-space: nowrap;
+  transform: rotate(-1.4deg);
+  text-shadow: 0 2px 0 rgba(116, 47, 138, .55);
+  box-shadow: 0 16px 34px rgba(18, 6, 30, .5);
+}
+
+/* --- Choreography --------------------------------------------------------
+   Every animated part starts in its "out" state. .slide--in releases them on
+   a stagger; .slide--out pulls them back the other way, faster.
+   -------------------------------------------------------------------------- */
+
+.slide .panel,
+.slide .panel__logo,
+.slide .where,
+.slide .eyebrow,
+.slide .headline__line,
+.slide .blurb,
+.slide .tag,
+.slide .link {
+  opacity: 0;
+  transition-duration: var(--in-dur);
+  transition-timing-function: var(--ease-out);
+  transition-property: opacity, transform, clip-path, filter;
+}
+
+/* out state (also the from-state on entry) */
+.slide .panel        { clip-path: inset(0 100% 0 0 round 12px); transform: rotate(-7.5deg) translateX(-44px); }
+.slide .panel__logo  { transform: translate(calc(-50% + var(--logo-nudge, 0px)), calc(-50% + 34px)) rotate(-1.2deg) scale(.84); }
+.slide .where        { transform: translateY(-38px) rotate(5deg); }
+.slide .eyebrow      { transform: translateX(-30px); }
+.slide .headline__line { transform: translateY(42px); filter: blur(9px); }
+.slide .blurb        { transform: translateY(26px); }
+.slide .tag          { transform: translateY(22px) scale(.9); }
+.slide .link         { transform: translateX(64px) rotate(3deg); }
+
+/* in state */
+.slide--in .panel        { opacity: 1; clip-path: inset(0 0 0 0 round 12px); transform: rotate(-3.4deg) translateX(0); }
+.slide--in .panel__logo  { opacity: 1; transform: translate(calc(-50% + var(--logo-nudge, 0px)), -50%) rotate(-1.2deg) scale(1); }
+.slide--in .where        { opacity: 1; transform: translateY(0) rotate(1.5deg); }
+.slide--in .eyebrow      { opacity: 1; transform: translateX(0); }
+.slide--in .headline__line { opacity: 1; transform: translateY(0); filter: blur(0); }
+.slide--in .blurb        { opacity: 1; transform: translateY(0); }
+.slide--in .tag          { opacity: 1; transform: translateY(0) scale(1); }
+.slide--in .link         { opacity: 1; transform: translateX(0) rotate(0deg); }
+
+.slide--in .panel__logo { transition-timing-function: var(--ease-pop); transition-duration: .82s; }
+.slide--in .where       { transition-timing-function: var(--ease-pop); }
+.slide--in .tag         { transition-timing-function: var(--ease-pop); }
+.slide--in .link        { transition-timing-function: var(--ease-pop); }
+
+/* entry stagger — panel first, call to action last */
+.slide--in .panel          { transition-delay: 0s; }
+.slide--in .panel__logo    { transition-delay: .20s; }
+.slide--in .where          { transition-delay: .24s; }
+.slide--in .eyebrow        { transition-delay: .32s; }
+.slide--in .headline__line { transition-delay: calc(.40s + var(--i, 0) * .09s); }
+.slide--in .blurb          { transition-delay: .62s; }
+.slide--in .tag            { transition-delay: calc(.70s + var(--i, 0) * .07s); }
+.slide--in .link           { transition-delay: .88s; }
+
+/* exit — reverse priority: the call to action leaves first, panel closes last */
+.slide--out .panel,
+.slide--out .panel__logo,
+.slide--out .where,
+.slide--out .eyebrow,
+.slide--out .headline__line,
+.slide--out .blurb,
+.slide--out .tag,
+.slide--out .link {
+  opacity: 0;
+  transition-duration: var(--out-dur);
+  transition-timing-function: var(--ease-in);
+}
+
+.slide--out .panel        { clip-path: inset(0 0 0 100% round 12px); transform: rotate(-1deg) translateX(46px); transition-delay: .16s; }
+.slide--out .panel__logo  { transform: translate(calc(-50% + var(--logo-nudge, 0px) - 70px), -50%) rotate(-1.2deg) scale(.94); transition-delay: .10s; }
+.slide--out .where        { transform: translateY(-34px) rotate(5deg); transition-delay: .12s; }
+.slide--out .eyebrow      { transform: translateX(-38px); transition-delay: .08s; }
+.slide--out .headline__line { transform: translateY(-34px); filter: blur(7px); transition-delay: calc(.04s + var(--i, 0) * .05s); }
+.slide--out .blurb        { transform: translateY(-22px); transition-delay: .02s; }
+.slide--out .tag          { transform: translateY(-18px) scale(.94); transition-delay: calc(0s + var(--i, 0) * .04s); }
+.slide--out .link         { transform: translateX(72px) rotate(3deg); transition-delay: 0s; }
+
+/* --- Reduced motion: cross-fade only ------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop__halftone,
+  .backdrop__bloom { animation: none; }
+
+  .slide .panel,
+  .slide .panel__logo,
+  .slide .where,
+  .slide .eyebrow,
+  .slide .headline__line,
+  .slide .blurb,
+  .slide .tag,
+  .slide .link {
+    transition-property: opacity;
+    transition-duration: .45s;
+    transition-delay: 0s !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+
+  .slide--in .panel        { transform: rotate(-3.4deg) !important; }
+  .slide--in .panel__logo  { transform: translate(calc(-50% + var(--logo-nudge, 0px)), -50%) rotate(-1.2deg) !important; }
+  .slide--in .where        { transform: rotate(1.5deg) !important; }
+  .slide--in .link__url    { transform: rotate(-1.4deg); }
+}
