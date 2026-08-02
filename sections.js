@@ -134,7 +134,23 @@ var CCC_SECTIONS = [
         blurb: 'Actors, voice actors, artists, cosplayers, musicians and creators from across the pop-culture universe — all coming together in Cyprus.',
         tags: ['Clive Russel', 'Dave Rodgers', 'Expedition 33 VAs'],
         urlLabel: 'Full lineup',
-        url: 'cypruscomiccon.org/artist-alley/',
+        url: 'cypruscomiccon.org/special-guests/',
+        accent: '#ef7521'
+    },
+
+    {
+        id: 'limit-break',
+        logo: 'assets/limit-break.png',
+        logoAlt: 'Limit Break',
+        logoHeight: 840,
+        logoNudge: 80,
+        location: 'Hall 5',
+        eyebrow: 'Gaming',
+        headline: ['<em>Tournaments</em>', '& Game Dev Showcases'],
+        blurb: 'The highest quality Smash Bros & Tekken tournaments in Cyprus, plus showcases from local game dev studios!',
+        tags: ['Super Smash Bros. Ultimate', 'Tekken 8', 'Dev Showcases'],
+        urlLabel: 'Full lineup',
+        url: 'cypruscomiccon.org/gaming/',
         accent: '#ef7521'
     },
 
