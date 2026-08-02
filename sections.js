@@ -154,6 +154,21 @@ var CCC_SECTIONS = [
         accent: '#ef7521'
     },
 
+    {
+        id: 'film-festival',
+        logo: 'assets/film-festival.png',
+        logoNudge: 55,
+        logoAlt: 'Film Festival',
+        location: 'Hall A',
+        eyebrow: 'Film Festival',
+        headline: ['<em>Films</em>', 'Animations & More'],
+        blurb: 'Local and international short films on the big screen, plus a 48 Hour Film Challenge with &euro;2,000 in cash prizes.',
+        tags: ['48 Hour Film Challenge', 'Horror, sci-fi & fantasy'],
+        urlLabel: 'More info at',
+        url: 'cypruscomiccon.org/film-festival/',
+        accent: '#ef7521'
+    },
+
 
     /* ---- Next section: uncomment, drop your logo in assets/, edit the text ----
     {
