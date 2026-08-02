@@ -42,7 +42,7 @@ var CCC_SECTIONS = [
         /* One array entry per line. Wrap words in <em> to tint them accent colour. */
         headline: ['<em>30+</em> Food', 'Vendors'],
 
-        blurb: 'Refuel between matches — hot food, sweet stuff and cold drinks.',
+        blurb: 'Refuel between attractions — hot food, sweet stuff and cold drinks.',
 
         /* Short pills under the blurb. Use [] for none. */
         tags: ['Street food', 'Sweets &amp; bakes', 'Cold drinks'],
@@ -166,6 +166,37 @@ var CCC_SECTIONS = [
         tags: ['48 Hour Film Challenge', 'Horror, sci-fi & fantasy'],
         urlLabel: 'More info at',
         url: 'cypruscomiccon.org/film-festival/',
+        accent: '#ef7521'
+    },
+
+    {
+        id: 'wrestling',
+        logo: 'assets/wrestling.png',
+        logoNudge: 55,
+        logoAlt: 'Wrestling',
+        location: 'Outside Hall 6',
+        eyebrow: 'Wrestling',
+        headline: ['<em>Pro Wrestling</em>'],
+        blurb: 'Pro Wrestling Cyprus bursts back into action as Cyprus Comic Con proudly presents Gods of Wrestling 2026!',
+        tags: ['Tom La Ruffa', 'Session Moth Martina'],
+        urlLabel: 'Full lineup',
+        url: 'cypruscomiccon.org/pro-wrestling-cyprus/',
+        accent: '#ef7521'
+    },
+
+    {
+        id: 'wrestling',
+        logo: 'assets/wrestling.png',
+        logoHeight: 580,
+        logoNudge: 95,
+        logoAlt: 'Wrestling',
+        location: 'Outside Hall 6',
+        eyebrow: 'Wrestling',
+        headline: ['<em>Pro Wrestling</em>'],
+        blurb: 'Pro Wrestling Cyprus bursts back into action as Cyprus Comic Con proudly presents Gods of Wrestling 2026!',
+        tags: ['Tom La Ruffa', 'Session Moth Martina'],
+        urlLabel: 'Full lineup',
+        url: 'cypruscomiccon.org/pro-wrestling-cyprus/',
         accent: '#ef7521'
     },
 
