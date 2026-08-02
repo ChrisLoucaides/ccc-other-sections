@@ -172,7 +172,8 @@ var CCC_SECTIONS = [
     {
         id: 'wrestling',
         logo: 'assets/wrestling.png',
-        logoNudge: 55,
+        logoHeight: 580,
+        logoNudge: 95,
         logoAlt: 'Wrestling',
         location: 'Outside Hall 6',
         eyebrow: 'Wrestling',
@@ -185,18 +186,18 @@ var CCC_SECTIONS = [
     },
 
     {
-        id: 'wrestling',
-        logo: 'assets/wrestling.png',
+        id: 'msqrd',
+        logo: 'assets/msqrd.png',
         logoHeight: 580,
         logoNudge: 95,
-        logoAlt: 'Wrestling',
-        location: 'Outside Hall 6',
-        eyebrow: 'Wrestling',
-        headline: ['<em>Pro Wrestling</em>'],
-        blurb: 'Pro Wrestling Cyprus bursts back into action as Cyprus Comic Con proudly presents Gods of Wrestling 2026!',
-        tags: ['Tom La Ruffa', 'Session Moth Martina'],
-        urlLabel: 'Full lineup',
-        url: 'cypruscomiccon.org/pro-wrestling-cyprus/',
+        logoAlt: 'msqrd',
+        location: 'Hall A',
+        eyebrow: 'Masquerade',
+        headline: ['<em>Cosplay</em>', 'Competition'],
+        blurb: 'This contest embraces a more laid-back approach, welcoming all handmade and partly handmade costumes, newcomers and seasoned enthusiasts alike',
+        tags: ['Cosplay', 'Prizes'],
+        urlLabel: 'Learn More:',
+        url: 'cypruscomiccon.org/ccc-masquerade/',
         accent: '#ef7521'
     },
 
