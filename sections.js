@@ -23,6 +23,22 @@ var CCC_SETTINGS = {
 var CCC_SECTIONS = [
 
     {
+        id: 'shops',
+        logo: 'assets/shops.png',
+        logoHeight: 780,
+        logoNudge: 105,
+        logoAlt: 'shops',
+        location: 'Hall 6 & 5',
+        eyebrow: 'Shopping',
+        headline: ['<em>Shops</em>', 'and Experiences'],
+        blurb: 'Cyprus Comic Con serves as a platform for shops, businesses, independent creators, local community groups, charities and NGOs',
+        tags: ['CCC Merch', 'Collectibles', 'Electronics', '& So Much More'],
+        urlLabel: 'Learn More:',
+        url: 'cypruscomiccon.org/booths/',
+        accent: '#ef7521'
+    },
+
+    {
         /* Used by the ?section= URL parameter — see README.md */
         id: 'nomnomnomicon',
 
@@ -193,6 +209,22 @@ var CCC_SECTIONS = [
         logoAlt: 'msqrd',
         location: 'Hall A',
         eyebrow: 'Masquerade',
+        headline: ['<em>Cosplay</em>', 'Competition'],
+        blurb: 'This contest embraces a more laid-back approach, welcoming all handmade and partly handmade costumes, newcomers and seasoned enthusiasts alike',
+        tags: ['Cosplay', 'Prizes'],
+        urlLabel: 'Learn More:',
+        url: 'cypruscomiccon.org/ccc-masquerade/',
+        accent: '#ef7521'
+    },
+
+    {
+        id: 'shops',
+        logo: 'assets/shops.png',
+        logoHeight: 580,
+        logoNudge: 95,
+        logoAlt: 'shops',
+        location: 'Hall 6 & 5',
+        eyebrow: 'Shops',
         headline: ['<em>Cosplay</em>', 'Competition'],
         blurb: 'This contest embraces a more laid-back approach, welcoming all handmade and partly handmade costumes, newcomers and seasoned enthusiasts alike',
         tags: ['Cosplay', 'Prizes'],
