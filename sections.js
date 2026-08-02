@@ -7,7 +7,7 @@
 var CCC_SETTINGS = {
     /* How long each section stays on screen, in milliseconds (12000 = 12s).
        A section can override this with its own `duration`. */
-    duration: 12000,
+    duration: 7000,
 
     /* Small Cyprus Comic Con logo in the top-left corner. Set to null to hide. */
     brandLogo: 'assets/ccc.png',
@@ -21,22 +21,6 @@ var CCC_SETTINGS = {
 };
 
 var CCC_SECTIONS = [
-
-    {
-        id: 'shops',
-        logo: 'assets/shops.png',
-        logoHeight: 780,
-        logoNudge: 105,
-        logoAlt: 'shops',
-        location: 'Hall 6 & 5',
-        eyebrow: 'Shopping',
-        headline: ['<em>Shops</em>', 'and Experiences'],
-        blurb: 'Cyprus Comic Con serves as a platform for shops, businesses, independent creators, local community groups, charities and NGOs',
-        tags: ['CCC Merch', 'Collectibles', 'Electronics', '& So Much More'],
-        urlLabel: 'Learn More:',
-        url: 'cypruscomiccon.org/booths/',
-        accent: '#ef7521'
-    },
 
     {
         /* Used by the ?section= URL parameter — see README.md */
@@ -104,7 +88,7 @@ var CCC_SECTIONS = [
         logoAlt: 'Medieval Zone',
         /* Square file with deep top and bottom padding, so it needs a tall box
            to carry the same weight as the other two marks. */
-        logoHeight: 830,
+        logoHeight: 890,
         logoNudge: 60,
 
         location: 'Hall 4, Outside Halls A & 6',
@@ -127,6 +111,7 @@ var CCC_SECTIONS = [
         id: 'artist-alley',
         logo: 'assets/artist-alley.png',
         logoAlt: "Artists' Alley",
+        logoHeight: 890,
         logoNudge: 60,
         location: 'Hall 6',
         eyebrow: "Artists' Alley",
@@ -204,7 +189,7 @@ var CCC_SECTIONS = [
     {
         id: 'msqrd',
         logo: 'assets/msqrd.png',
-        logoHeight: 580,
+        logoHeight: 650,
         logoNudge: 95,
         logoAlt: 'msqrd',
         location: 'Hall A',
@@ -220,7 +205,7 @@ var CCC_SECTIONS = [
     {
         id: 'shops',
         logo: 'assets/shops.png',
-        logoHeight: 580,
+        logoHeight: 880,
         logoNudge: 95,
         logoAlt: 'shops',
         location: 'Hall 6 & 5',
@@ -230,6 +215,22 @@ var CCC_SECTIONS = [
         tags: ['Cosplay', 'Prizes'],
         urlLabel: 'Learn More:',
         url: 'cypruscomiccon.org/ccc-masquerade/',
+        accent: '#ef7521'
+    },
+
+    {
+        id: 'tabletop',
+        logo: 'assets/tabletop.png',
+        logoHeight: 800,
+        logoNudge: 105,
+        logoAlt: 'tabletop',
+        location: 'Hall 4 & 6',
+        eyebrow: 'Tabletop',
+        headline: ['<em>TCG, DnD</em>', 'and More!'],
+        blurb: 'Your go-to zone for analog adventure! Dive into a realm of dice rolls, epic quests, and quick strategy games',
+        tags: ['TCG', 'Board Games', 'DND'],
+        urlLabel: 'Learn More:',
+        url: 'cypruscomiccon.org/tableflip/',
         accent: '#ef7521'
     },
 
