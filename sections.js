@@ -245,8 +245,24 @@ var CCC_SECTIONS = [
         headline: ['<em>GameDev</em>', '& More'],
         blurb: 'A vibrant space where innovative game developers, tech-savvy creators, and educational trailblazers come together to share their passion for science, technology, engineering, and math',
         tags: ['Game Dev', 'Technology', 'Education'],
-        urlLabel: 'Learn More:',
+        urlLabel: 'STEM Partners',
         url: 'cypruscomiccon.org/stem/',
+        accent: '#ef7521'
+    },
+
+    {
+        id: 'kids-zone',
+        logo: 'assets/kids-zone.png',
+        logoHeight: 900,
+        logoNudge: 100,
+        logoAlt: 'kids-zone',
+        location: 'Hall 5',
+        eyebrow: 'Fun for the little ones',
+        headline: ['<em>Kids Zone</em>',],
+        blurb: 'The Kids Zone is the perfect stop for the young – and the young at heart! From whimsical face painting and arts & crafts to colorful games and playful surprises, this space is designed to spark creativity and joy in kids of all ages.',
+        tags: ['Kids Zone'],
+        urlLabel: 'Learn More',
+        url: 'cypruscomiccon.org/kids-zone/',
         accent: '#ef7521'
     },
 
