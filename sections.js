@@ -108,6 +108,22 @@ var CCC_SECTIONS = [
     },
 
     {
+        id: 'outdoor',
+        logo: 'assets/outdoor.png',
+        logoHeight: 650,
+        logoNudge: 100,
+        logoAlt: 'outdoor',
+        location: 'Outdoors',
+        eyebrow: 'Performances & More',
+        headline: ['<em>Outdoor Festival</em>',],
+        blurb: 'Our live music stage this year is so jam-packed it overflowed into the wrestling ring  and the medieval tavern – from morning until midnight with local and international acts and all with a little bit of a comic con twist',
+        tags: ['Outdoor  Festival'],
+        urlLabel: 'More info',
+        url: 'cypruscomiccon.org/outdoor-festival/',
+        accent: '#ef7521'
+    },
+
+    {
         id: 'artist-alley',
         logo: 'assets/artist-alley.png',
         logoAlt: "Artists' Alley",
@@ -254,7 +270,7 @@ var CCC_SECTIONS = [
         id: 'kids-zone',
         logo: 'assets/kids-zone.png',
         logoHeight: 900,
-        logoNudge: 100,
+        logoNudge: 90,
         logoAlt: 'kids-zone',
         location: 'Hall 5',
         eyebrow: 'Fun for the little ones',
