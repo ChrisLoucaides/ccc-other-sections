@@ -234,6 +234,22 @@ var CCC_SECTIONS = [
         accent: '#ef7521'
     },
 
+    {
+        id: 'stem',
+        logo: 'assets/stem.png',
+        logoHeight: 900,
+        logoNudge: 100,
+        logoAlt: 'tabletop',
+        location: 'Hall 5',
+        eyebrow: 'STEM',
+        headline: ['<em>GameDev</em>', '& More'],
+        blurb: 'A vibrant space where innovative game developers, tech-savvy creators, and educational trailblazers come together to share their passion for science, technology, engineering, and math',
+        tags: ['Game Dev', 'Technology', 'Education'],
+        urlLabel: 'Learn More:',
+        url: 'cypruscomiccon.org/stem/',
+        accent: '#ef7521'
+    },
+
 
     /* ---- Next section: uncomment, drop your logo in assets/, edit the text ----
     {
