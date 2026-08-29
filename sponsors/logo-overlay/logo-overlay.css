@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Limit Break — sponsor logo-only overlay
+   Just the logos, cross-fading in place. No card, no border, no backdrop,
+   no timer, no text — for slots where even ../overlay's small card is more
+   than the shot needs.
+   ========================================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Transparent all the way down — OBS composites this straight over the game */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* --- Stage ---------------------------------------------------------------
+   Same fixed 1920x1080 design frame the rest of this project's overlays use,
+   scaled to fit whatever size OBS gives the source, so the logo lands in the
+   same place on a 1080p or a 720p feed.
+   ------------------------------------------------------------------------ */
+
+.stage-fit { position: fixed; inset: 0; overflow: hidden; }
+
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  margin: -540px 0 0 -960px;
+  transform-origin: center center;   /* scale set by app.js */
+}
+
+/* --- The logo box ----------------------------------------------------------
+   Just a positioned, sized box — no fill, no border. Every logo is fit to
+   the same box with object-fit: contain, so wordmarks and square badges all
+   read at the same optical size. Position and size are written inline by
+   app.js from logo-overlay.js.
+   ------------------------------------------------------------------------ */
+
+.logo-box {
+  position: absolute;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+
+  opacity: 0;
+  transition: opacity .40s ease-out;
+}
+
+.logo--in  { opacity: 1; }
+.logo--out { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo { transition: none; }
+}

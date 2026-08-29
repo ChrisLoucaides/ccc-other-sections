@@ -68,7 +68,7 @@ var CCC_SPONSORS = [
 
     { logo: 'assets/KFC.png',          name: 'KFC.com.cy' },
 
-    { logo: 'assets/pizza-hut.webp',   name: 'PizzaHut.com.cy' },
+    { logo: 'assets/pizza-hut.png',    name: 'PizzaHut.com.cy' },
 
     { logo: 'assets/taco-bell.webp',   name: 'TacoBell.com.cy' },
 
@@ -76,6 +76,10 @@ var CCC_SPONSORS = [
 
     { logo: 'assets/3define.png',      name: '3Define.info' },
 
-    { logo: 'assets/kemanes.png',      name: 'KemanesPrintShop.com' }
+    { logo: 'assets/kemanes.png',      name: 'KemanesPrintShop.com' },
+
+    { logo: 'assets/CCC Only Logo Icon.png', name: 'Cyprus Comic Con', id: 'ccc' },
+
+    { logo: 'assets/SmashCY_Logo.png', name: 'SmashCY', id: 'smashcy' }
 
 ];

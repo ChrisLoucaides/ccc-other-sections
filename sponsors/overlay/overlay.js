@@ -10,7 +10,7 @@ var CCC_OVERLAY_SETTINGS = {
     /* How long each sponsor holds, in milliseconds. Slower than the
        full-screen rotator on purpose — this sits next to live gameplay and a
        fast flicker in the corner of the eye is distracting. */
-    duration: 10000,
+    duration: 3000,
 
     /* Where the card sits on the 1920x1080 frame. One of:
        'bottom-center', 'bottom-left', 'bottom-right', 'top-left', 'top-right'.

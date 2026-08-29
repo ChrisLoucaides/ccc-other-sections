@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Limit Break — Sponsor Logo Overlay</title>
+<!-- The sponsor list comes from the full-screen rotator one folder up, so
+     there is only ever one list to keep up to date. -->
+<script src="../sponsors.js"></script>
+<link rel="stylesheet" href="logo-overlay.css">
+</head>
+<body>
+
+  <!-- No backdrop, no card, no text, no timer: just the logos, for slots
+       where even the in-game card (../overlay) is too much. -->
+  <div class="stage-fit">
+    <div class="stage" id="stage">
+      <div class="logo-box" id="logoBox"></div>
+    </div>
+  </div>
+
+  <script src="logo-overlay.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
