@@ -163,7 +163,7 @@ var CCC_SECTIONS = [
         logoNudge: 80,
         location: 'Hall 5',
         eyebrow: 'Gaming',
-        headline: ['<em>Tournaments</em>', '& Game Dev Showcases'],
+        headline: ['<em>Tourneys</em>', '& Game Dev Showcases'],
         blurb: 'The highest quality Smash Bros & Tekken tournaments in Cyprus, plus showcases from local game dev studios!',
         tags: ['Super Smash Bros. Ultimate', 'Tekken 8', 'Dev Showcases'],
         urlLabel: 'Full lineup',
