@@ -78,6 +78,9 @@ var CCC_SPONSORS = [
 
     { logo: 'assets/kemanes.png',      name: 'KemanesPrintShop.com' },
 
+    /* letterspaced wordmark with padding baked into the file, like petrolina/sliq */
+    { logo: 'assets/tengo.png',        name: 'Tengo', scale: 1.20 },
+
     { logo: 'assets/CCC Only Logo Icon.png', name: 'Cyprus Comic Con', id: 'ccc' },
 
     { logo: 'assets/SmashCY_Logo.png', name: 'SmashCY', id: 'smashcy' }
