@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CCC '26 — Install the CCC App</title>
+<meta name="color-scheme" content="light only">
+<style>
+  :root { color-scheme: light only; }
+  /* App install poster: 1080x1440px */
+  @font-face {
+    font-family: 'CCC Display';
+    font-weight: 800;
+    font-style: normal;
+    src: url('../../fonts/LEMONMILK-Medium.otf') format('opentype'),
+         local('LEMONMILK-Medium'), local('LEMON MILK'),
+         url('../../fonts/poppins-800.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'CCC Body';
+    font-weight: 500;
+    font-style: normal;
+    src: local('KeepCalm-Medium'), local('Keep Calm Medium'), local('Keep Calm'),
+         url('../../fonts/quicksand-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'CCC Body';
+    font-weight: 700;
+    font-style: normal;
+    src: local('KeepCalm-Book'), local('Keep Calm Medium'), local('Keep Calm'),
+         url('../../fonts/quicksand-700.woff2') format('woff2');
+  }
+
+  :root {
+    --grape:       #742f8a;
+    --grape-lift:  #93409f;
+    --grape-deep:  #3a1450;
+    --grape-abyss: #200b2e;
+    --zest:        #ef7521;
+    --night:       #181818;
+    --cream:       #f7f4fb;
+    --font-display: 'CCC Display', 'Poppins', 'Segoe UI', sans-serif;
+    --font-body:    'CCC Body', 'Quicksand', 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    height: 1440px;
+    overflow: hidden;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sheet {
+    position: relative;
+    width: 1080px;
+    height: 1440px;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 70% at 22% 3%,
+        var(--grape-lift) 0%,
+        var(--grape)      30%,
+        var(--grape-deep) 64%,
+        var(--grape-abyss) 100%);
+  }
+
+  .sheet::before {
+    content: '';
+    position: absolute;
+    inset: -60px;
+    background-image: radial-gradient(circle, rgba(255,255,255,.12) 2.4px, transparent 2.7px);
+    background-size: 34px 34px;
+    pointer-events: none;
+  }
+
+  .bloom {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(46% 30% at 85% 92%, rgba(239, 117, 33, .34), transparent 70%);
+    filter: blur(46px);
+    pointer-events: none;
+  }
+  .bloom2 {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(40% 26% at 8% 96%, rgba(239, 117, 33, .22), transparent 70%);
+    filter: blur(46px);
+    pointer-events: none;
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(80% 66% at 50% 40%, transparent 48%, rgba(24, 6, 34, .5) 100%);
+    pointer-events: none;
+  }
+
+  .brandchip {
+    position: absolute;
+    top: 34px;
+    left: 46px;
+    z-index: 5;
+    transform: rotate(-1.6deg);
+  }
+  .brandchip img {
+    height: 100px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 8px 18px rgba(18, 6, 30, .5));
+  }
+
+  .printchip {
+    position: absolute;
+    top: 38px;
+    right: 46px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    transform: rotate(1.6deg);
+  }
+  .printchip span {
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(247, 244, 251, .8);
+  }
+  .printchip img {
+    width: 280px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 18px rgba(18, 6, 30, .5));
+  }
+
+  .kicker {
+    position: absolute;
+    top: 172px;
+    left: 0;
+    width: 1080px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--zest);
+  }
+  .kicker::before, .kicker::after {
+    content: '';
+    width: 50px;
+    height: 4px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .headline {
+    position: absolute;
+    top: 216px;
+    left: 0;
+    width: 1080px;
+    z-index: 3;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 78px;
+    line-height: .96;
+    letter-spacing: -.005em;
+    color: var(--cream);
+    text-shadow: 0 10px 26px rgba(18, 6, 30, .5);
+  }
+  .headline em { font-style: normal; color: var(--zest); }
+
+  /* ---------- phone ---------- */
+  .ring {
+    position: absolute;
+    top: 520px;
+    left: 30px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 44px solid rgba(239, 117, 33, .28);
+    z-index: 2;
+  }
+
+  .phone {
+    position: absolute;
+    top: 372px;
+    left: 78px;
+    width: 408px;
+    height: 826px;
+    padding: 14px;
+    border-radius: 56px;
+    background: linear-gradient(145deg, #2c2233 0%, #120c17 55%, #221a29 100%);
+    box-shadow:
+      inset 0 0 0 2px rgba(255, 255, 255, .14),
+      0 34px 60px rgba(18, 6, 30, .6);
+    transform: rotate(-5deg);
+    z-index: 3;
+  }
+  .phone::before, .phone::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    width: 5px;
+    border-radius: 0 3px 3px 0;
+    background: #2c2233;
+  }
+  .phone::before { top: 150px; height: 70px; }
+  .phone::after  { top: 250px; height: 110px; }
+  .screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 43px;
+    overflow: hidden;
+    background: #3a1450;
+  }
+  .screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  /* ---------- right column ---------- */
+  .pitch {
+    position: absolute;
+    top: 420px;
+    left: 552px;
+    width: 474px;
+    z-index: 3;
+  }
+  .pitch h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 36px;
+    line-height: 1.02;
+    color: var(--zest);
+    text-shadow: 0 8px 18px rgba(18, 6, 30, .45);
+    margin-bottom: 26px;
+  }
+  .pitch ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .pitch li {
+    position: relative;
+    padding-left: 44px;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 1.22;
+    color: var(--cream);
+  }
+  .pitch li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: var(--zest);
+    box-shadow: 0 4px 10px rgba(18, 6, 30, .4);
+    transform: rotate(-8deg);
+  }
+  .pitch li::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 10px;
+    width: 7px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 3.5px 3.5px 0;
+    transform: rotate(40deg);
+  }
+
+  .stores {
+    position: absolute;
+    top: 898px;
+    left: 552px;
+    width: 460px;
+    z-index: 3;
+    display: flex;
+    gap: 22px;
+  }
+  .store {
+    flex: 1;
+    background: var(--cream);
+    border: 7px solid var(--grape);
+    border-radius: 20px;
+    box-shadow: 0 24px 44px rgba(18, 6, 30, .5);
+    padding: 12px 10px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .store:nth-child(1) { transform: rotate(-1.5deg); }
+  .store:nth-child(2) { transform: rotate(1.5deg); }
+  .store img {
+    width: 196px;
+    height: 196px;
+    display: block;
+  }
+  .store .os {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--grape);
+  }
+  .store .shop {
+    margin-top: -4px;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--zest);
+  }
+
+  .appcta {
+    position: absolute;
+    top: 1292px;
+    left: 0;
+    width: 1080px;
+    z-index: 4;
+    text-align: center;
+  }
+  .appcta span {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 20px 40px;
+    border: 4px solid var(--grape);
+    border-radius: 14px;
+    background: var(--zest);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: .005em;
+    text-shadow: 0 2px 0 rgba(116, 47, 138, .55);
+    box-shadow: 0 12px 26px rgba(18, 6, 30, .5);
+    transform: rotate(-1deg);
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="bloom"></div>
+    <div class="bloom2"></div>
+    <div class="vignette"></div>
+
+    <div class="brandchip"><img src="../../assets/ccc.png" alt="Cyprus Comic Con"></div>
+    <div class="printchip"><span>Print Sponsor</span><img src="../../sponsors/assets/kemanes.png" alt="Kemanes Print Shop"></div>
+
+    <div class="kicker">CCC '26</div>
+    <div class="headline">Install the <em>CCC App!</em></div>
+
+    <div class="ring"></div>
+    <div class="phone">
+      <div class="screen"><img src="../../assets/Screenshot_2026-09-12-10-06-20-092_org.cypruscomiccon.app.jpg" alt="Cyprus Comic Con app home screen"></div>
+    </div>
+
+    <div class="pitch">
+      <h2>Your new<br>digital companion!</h2>
+      <ul>
+        <li>Plan your weekend</li>
+        <li>Find your way around the venue</li>
+        <li>Customise reminders for each event</li>
+        <li>Comics, artists, cosplay, gaming, live music &amp; shows, and so much more!</li>
+        <li>Digital scavenger hunt - win prizes!</li>
+      </ul>
+    </div>
+
+    <div class="stores">
+      <div class="store">
+        <span class="os">iOS</span>
+        <img src="../../assets/QR%20Codes/CCC%20App%20Store.png" alt="iOS App Store QR code">
+        <span class="shop">App Store</span>
+      </div>
+      <div class="store">
+        <span class="os">Android</span>
+        <img src="../../assets/QR%20Codes/CCC%20Play%20Store.png" alt="Google Play QR code">
+        <span class="shop">Google Play</span>
+      </div>
+    </div>
+
+    <div class="appcta"><span>Scan to download on iOS &amp; Android!</span></div>
+  </div>
+</body>
+</html>

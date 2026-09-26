@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CCC '26 — Install the CCC App (animated)</title>
+<meta name="color-scheme" content="light only">
+<style>
+  :root { color-scheme: light only; }
+  /* Animated app install ad: 1080x1920px browser source */
+  @font-face {
+    font-family: 'CCC Display';
+    font-weight: 800;
+    font-style: normal;
+    src: url('../../fonts/LEMONMILK-Medium.otf') format('opentype'),
+         local('LEMONMILK-Medium'), local('LEMON MILK'),
+         url('../../fonts/poppins-800.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'CCC Body';
+    font-weight: 500;
+    font-style: normal;
+    src: local('KeepCalm-Medium'), local('Keep Calm Medium'), local('Keep Calm'),
+         url('../../fonts/quicksand-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'CCC Body';
+    font-weight: 700;
+    font-style: normal;
+    src: local('KeepCalm-Book'), local('Keep Calm Medium'), local('Keep Calm'),
+         url('../../fonts/quicksand-700.woff2') format('woff2');
+  }
+
+  :root {
+    --grape:       #742f8a;
+    --grape-lift:  #93409f;
+    --grape-deep:  #3a1450;
+    --grape-abyss: #200b2e;
+    --zest:        #ef7521;
+    --night:       #181818;
+    --cream:       #f7f4fb;
+    --font-display: 'CCC Display', 'Poppins', 'Segoe UI', sans-serif;
+    --font-body:    'CCC Body', 'Quicksand', 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    background: var(--grape-abyss);
+  }
+
+  .sheet {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 62% at 22% 3%,
+        var(--grape-lift) 0%,
+        var(--grape)      28%,
+        var(--grape-deep) 62%,
+        var(--grape-abyss) 100%);
+  }
+
+  .sheet::before {
+    content: '';
+    position: absolute;
+    inset: -80px;
+    background-image: radial-gradient(circle, rgba(255,255,255,.12) 2.4px, transparent 2.7px);
+    background-size: 34px 34px;
+    pointer-events: none;
+    animation: drift 24s linear infinite;
+  }
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(34px, 34px, 0); }
+  }
+
+  .bloom {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(44% 24% at 85% 90%, rgba(239, 117, 33, .34), transparent 70%);
+    filter: blur(46px);
+    pointer-events: none;
+    opacity: 0;
+  }
+  .bloom2 {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(38% 20% at 8% 95%, rgba(239, 117, 33, .22), transparent 70%);
+    filter: blur(46px);
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(80% 62% at 50% 40%, transparent 46%, rgba(24, 6, 34, .55) 100%);
+    pointer-events: none;
+  }
+
+  .brandchip {
+    position: absolute;
+    top: 46px;
+    left: 54px;
+    z-index: 5;
+    transform: translate3d(0, -220px, 0) rotate(-14deg);
+    opacity: 0;
+  }
+  .brandchip img {
+    height: 124px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 8px 18px rgba(18, 6, 30, .5));
+  }
+
+  .kicker {
+    position: absolute;
+    top: 226px;
+    left: 0;
+    width: 1080px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--zest);
+    opacity: 0;
+  }
+  .kicker::before, .kicker::after {
+    content: '';
+    width: 0;
+    height: 4px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .headline {
+    position: absolute;
+    top: 278px;
+    left: 0;
+    width: 1080px;
+    z-index: 3;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 82px;
+    line-height: .96;
+    letter-spacing: -.005em;
+    color: var(--cream);
+    text-shadow: 0 10px 26px rgba(18, 6, 30, .5);
+  }
+  .headline em { font-style: normal; color: var(--zest); }
+  .headline .w {
+    display: inline-block;
+    transform: translate3d(0, 90px, 0);
+    opacity: 0;
+  }
+
+  /* ---------- phone ---------- */
+  .ring {
+    position: absolute;
+    top: 700px;
+    left: 8px;
+    width: 540px;
+    height: 540px;
+    border-radius: 50%;
+    border: 46px solid rgba(239, 117, 33, .28);
+    z-index: 2;
+    transform: scale(.2);
+    opacity: 0;
+  }
+
+  .phone-stage {
+    position: absolute;
+    top: 510px;
+    left: 62px;
+    width: 480px;
+    height: 971px;
+    z-index: 3;
+    transform: translate3d(620px, 1020px, 0) rotate(26deg) scale(.72);
+    opacity: 0;
+  }
+
+  .phone {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    border-radius: 62px;
+    background: linear-gradient(145deg, #2c2233 0%, #120c17 55%, #221a29 100%);
+    box-shadow:
+      inset 0 0 0 2px rgba(255, 255, 255, .14),
+      0 40px 70px rgba(18, 6, 30, .6);
+    transform: rotate(-5deg);
+    position: relative;
+  }
+  .phone::before, .phone::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    width: 5px;
+    border-radius: 0 3px 3px 0;
+    background: #2c2233;
+  }
+  .phone::before { top: 176px; height: 82px; }
+  .phone::after  { top: 294px; height: 130px; }
+
+  .screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 48px;
+    overflow: hidden;
+    background: #07030b;
+  }
+  .screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+  }
+  /* black panel that "powers on" */
+  .power {
+    position: absolute;
+    inset: 0;
+    background: #07030b;
+    z-index: 2;
+    opacity: 1;
+  }
+  /* glass sheen sweeping across the screen */
+  .sheen {
+    position: absolute;
+    top: -40%;
+    left: -70%;
+    width: 60%;
+    height: 180%;
+    z-index: 3;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+    transform: rotate(16deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ---------- right column ---------- */
+  .pitch {
+    position: absolute;
+    top: 560px;
+    left: 586px;
+    width: 456px;
+    z-index: 3;
+  }
+  .pitch h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 42px;
+    line-height: 1.02;
+    color: var(--zest);
+    text-shadow: 0 8px 18px rgba(18, 6, 30, .45);
+    margin-bottom: 30px;
+    transform: translate3d(80px, 0, 0);
+    opacity: 0;
+  }
+  .pitch ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .pitch li {
+    position: relative;
+    padding-left: 50px;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 1.22;
+    color: var(--cream);
+    transform: translate3d(70px, 0, 0);
+    opacity: 0;
+  }
+  .pitch li .tick {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 27px;
+    height: 27px;
+    border-radius: 8px;
+    background: var(--zest);
+    box-shadow: 0 4px 10px rgba(18, 6, 30, .4);
+    transform: rotate(-8deg) scale(0);
+  }
+  .pitch li .tick::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 8px;
+    height: 14px;
+    border: solid #fff;
+    border-width: 0 4px 4px 0;
+    transform: rotate(40deg);
+  }
+
+  .stores {
+    position: absolute;
+    top: 1200px;
+    left: 586px;
+    width: 456px;
+    z-index: 3;
+    display: flex;
+    gap: 24px;
+  }
+  .store {
+    flex: 1;
+    background: var(--cream);
+    border: 7px solid var(--grape);
+    border-radius: 22px;
+    box-shadow: 0 24px 44px rgba(18, 6, 30, .5);
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+  }
+  .store:nth-child(1) { transform: rotate(-1.5deg) scale(.4) translate3d(0, 90px, 0); }
+  .store:nth-child(2) { transform: rotate(1.5deg) scale(.4) translate3d(0, 90px, 0); }
+  .store img {
+    width: 190px;
+    height: 190px;
+    display: block;
+  }
+  .store .os {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 27px;
+    line-height: 1;
+    color: var(--grape);
+  }
+  .store .shop {
+    margin-top: -2px;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--zest);
+  }
+
+  .appcta {
+    position: absolute;
+    top: 1640px;
+    left: 0;
+    width: 1080px;
+    z-index: 4;
+    text-align: center;
+  }
+  .appcta span {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 24px 46px;
+    border: 4px solid var(--grape);
+    border-radius: 16px;
+    background: var(--zest);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: .005em;
+    text-shadow: 0 2px 0 rgba(116, 47, 138, .55);
+    box-shadow: 0 12px 26px rgba(18, 6, 30, .5);
+    transform: rotate(-1deg) scale(.4);
+    opacity: 0;
+  }
+
+  /* ============ timeline (runs once body gets .go) ============ */
+  body.go .bloom      { animation: fade-in 1.4s ease-out .10s forwards; }
+  body.go .bloom2     { animation: fade-in 1.4s ease-out .30s forwards; }
+
+  body.go .brandchip  { animation: drop-in .95s cubic-bezier(.18,.9,.28,1.4) .15s forwards; }
+  body.go .kicker     { animation: fade-in .7s ease-out .55s forwards; }
+  body.go .kicker::before,
+  body.go .kicker::after { animation: rule-grow .7s cubic-bezier(.2,.8,.3,1) .70s forwards; }
+  body.go .headline .w1 { animation: rise .85s cubic-bezier(.18,.9,.28,1.25) .70s forwards; }
+  body.go .headline .w2 { animation: rise .85s cubic-bezier(.18,.9,.28,1.25) .82s forwards; }
+
+  body.go .ring       { animation: ring-in 1.1s cubic-bezier(.18,.9,.28,1.3) 1.05s forwards,
+                                   ring-pulse 6s ease-in-out 4.2s infinite; }
+
+  /* phone flies in, lands with a small settle */
+  body.go .phone-stage { animation: fly-in 1.25s cubic-bezier(.16,.84,.26,1.06) 1.10s forwards; }
+  body.go .phone       { animation: phone-land .6s ease-out 2.30s 1,
+                                    phone-float 6s ease-in-out 5.0s infinite; }
+  /* screen powers on: flicker, then off */
+  body.go .power       { animation: power-on 1.0s ease-out 2.45s forwards; }
+  /* app screenshot slides up into the lit screen */
+  body.go .screen img  { animation: screen-slide .95s cubic-bezier(.18,.86,.28,1.04) 2.95s forwards; }
+  body.go .sheen       { animation: sheen-sweep 2.6s ease-in-out 4.2s infinite; }
+
+  body.go .pitch h2   { animation: slide-left .8s cubic-bezier(.2,.85,.3,1.05) 3.30s forwards; }
+  body.go .pitch li   { animation: slide-left .7s cubic-bezier(.2,.85,.3,1.05) var(--d) forwards; }
+  body.go .pitch li .tick { animation: tick-pop .55s cubic-bezier(.2,.9,.3,1.6) calc(var(--d) + .18s) forwards; }
+
+  body.go .store:nth-child(1) { animation: card-in-l .85s cubic-bezier(.2,.9,.3,1.5) 4.55s forwards; }
+  body.go .store:nth-child(2) { animation: card-in-r .85s cubic-bezier(.2,.9,.3,1.5) 4.70s forwards; }
+
+  body.go .appcta span { animation: cta-in .8s cubic-bezier(.2,.9,.3,1.6) 5.05s forwards,
+                                    cta-pulse 2.6s ease-in-out 6.0s infinite; }
+
+  @keyframes fade-in   { to { opacity: 1; } }
+  @keyframes drop-in {
+    0%   { transform: translate3d(0, -220px, 0) rotate(-14deg); opacity: 0; }
+    70%  { opacity: 1; }
+    100% { transform: translate3d(0, 0, 0) rotate(-1.6deg); opacity: 1; }
+  }
+  @keyframes rule-grow { to { width: 54px; } }
+  @keyframes rise      { to { transform: translate3d(0, 0, 0); opacity: 1; } }
+  @keyframes ring-in {
+    0%   { transform: scale(.2) rotate(-40deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  @keyframes ring-pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.035); }
+  }
+  @keyframes fly-in {
+    0%   { transform: translate3d(620px, 1020px, 0) rotate(26deg) scale(.72); opacity: 0; }
+    18%  { opacity: 1; }
+    72%  { transform: translate3d(-14px, -26px, 0) rotate(-3deg) scale(1.03); opacity: 1; }
+    100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
+  }
+  @keyframes phone-land {
+    0%   { transform: rotate(-5deg) translate3d(0, 0, 0); }
+    35%  { transform: rotate(-5deg) translate3d(0, 9px, 0); }
+    100% { transform: rotate(-5deg) translate3d(0, 0, 0); }
+  }
+  @keyframes phone-float {
+    0%, 100% { transform: rotate(-5deg) translate3d(0, 0, 0); }
+    50%      { transform: rotate(-4.4deg) translate3d(0, -16px, 0); }
+  }
+  @keyframes power-on {
+    0%   { opacity: 1; background: #07030b; }
+    22%  { opacity: .35; background: #cbb6e6; }
+    34%  { opacity: .95; background: #07030b; }
+    52%  { opacity: .18; background: #f3ecff; }
+    70%  { opacity: .45; background: #2a1338; }
+    100% { opacity: 0; background: #3a1450; }
+  }
+  @keyframes screen-slide {
+    0%   { transform: translate3d(0, 100%, 0); opacity: 0; }
+    12%  { opacity: 1; }
+    100% { transform: translate3d(0, 0, 0); opacity: 1; }
+  }
+  @keyframes sheen-sweep {
+    0%       { left: -70%; opacity: 0; }
+    12%      { opacity: .9; }
+    46%      { opacity: .9; }
+    58%      { left: 130%; opacity: 0; }
+    100%     { left: 130%; opacity: 0; }
+  }
+  @keyframes slide-left { to { transform: translate3d(0, 0, 0); opacity: 1; } }
+  @keyframes tick-pop   { to { transform: rotate(-8deg) scale(1); } }
+  @keyframes card-in-l {
+    0%   { transform: rotate(-16deg) scale(.4) translate3d(0, 90px, 0); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: rotate(-1.5deg) scale(1) translate3d(0, 0, 0); opacity: 1; }
+  }
+  @keyframes card-in-r {
+    0%   { transform: rotate(16deg) scale(.4) translate3d(0, 90px, 0); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: rotate(1.5deg) scale(1) translate3d(0, 0, 0); opacity: 1; }
+  }
+  @keyframes cta-in {
+    0%   { transform: rotate(-14deg) scale(.4); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: rotate(-1deg) scale(1); opacity: 1; }
+  }
+  @keyframes cta-pulse {
+    0%, 100% { transform: rotate(-1deg) scale(1); box-shadow: 0 12px 26px rgba(18, 6, 30, .5); }
+    50%      { transform: rotate(-1deg) scale(1.035); box-shadow: 0 18px 38px rgba(239, 117, 33, .45); }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="bloom"></div>
+    <div class="bloom2"></div>
+    <div class="vignette"></div>
+
+    <div class="brandchip"><img src="../../assets/ccc.png" alt="Cyprus Comic Con"></div>
+
+    <div class="kicker">CCC '26</div>
+    <div class="headline"><span class="w w1">Install the</span> <span class="w w2"><em>CCC App!</em></span></div>
+
+    <div class="ring"></div>
+    <div class="phone-stage">
+      <div class="phone">
+        <div class="screen">
+          <img src="../../assets/Screenshot_2026-09-12-10-06-20-092_org.cypruscomiccon.app.jpg" alt="Cyprus Comic Con app home screen">
+          <div class="power"></div>
+          <div class="sheen"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pitch">
+      <h2>Your new<br>digital companion!</h2>
+      <ul>
+        <li style="--d:3.50s"><span class="tick"></span>Plan your weekend</li>
+        <li style="--d:3.64s"><span class="tick"></span>Find your way around the venue</li>
+        <li style="--d:3.78s"><span class="tick"></span>Customise reminders for each event</li>
+        <li style="--d:3.92s"><span class="tick"></span>Comics, artists, cosplay, gaming, live music &amp; shows, and so much more!</li>
+        <li style="--d:4.06s"><span class="tick"></span>Digital scavenger hunt - win prizes!</li>
+      </ul>
+    </div>
+
+    <div class="stores">
+      <div class="store">
+        <span class="os">iOS</span>
+        <img src="../../assets/QR%20Codes/CCC%20App%20Store.png" alt="iOS App Store QR code">
+        <span class="shop">App Store</span>
+      </div>
+      <div class="store">
+        <span class="os">Android</span>
+        <img src="../../assets/QR%20Codes/CCC%20Play%20Store.png" alt="Google Play QR code">
+        <span class="shop">Google Play</span>
+      </div>
+    </div>
+
+    <div class="appcta"><span>Scan to download on iOS &amp; Android!</span></div>
+  </div>
+
+<script>
+  // Hold everything hidden until fonts + images are ready, then run the intro.
+  // Optional loop:  app-install-animated.html?loop=20   (restarts every 20s)
+  var params = new URLSearchParams(location.search);
+  var loopSecs = parseFloat(params.get('loop'));
+  var started = false;
+
+  function start() {
+    document.body.classList.remove('go');
+    void document.body.offsetWidth; // force reflow so animations restart
+    document.body.classList.add('go');
+  }
+
+  function kick() {
+    if (started) return;
+    started = true;
+    start();
+    if (loopSecs > 0) setInterval(start, loopSecs * 1000);
+  }
+
+  // Whichever comes first: assets ready, fonts ready, or a hard 1.2s fallback
+  // so the intro never stalls on a missing font in a browser source.
+  if (document.readyState === 'complete') kick();
+  else window.addEventListener('load', kick);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(kick);
+  setTimeout(kick, 1200);
+</script>
+</body>
+</html>
